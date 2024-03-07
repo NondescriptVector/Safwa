@@ -12,14 +12,14 @@ public class Room {
 
     Room(int ID) {
         this.ID = ID;
-        this.Booked = generateBoolean(); // Use separate method for generating random boolean
-        this.NumOfBeds = generateNumOfBeds(); // Use separate method for generating random beds
+        this.Booked = generateBoolean(); 
+        this.NumOfBeds = generateNumOfBeds(); 
         if (this.Booked) {
-            this.nights = generateNights(); // Use separate method for generating random nights
+            this.nights = generateNights(); 
         } else {
             this.nights = 0;
         }
-        this.Price = NumOfBeds * 150; // 150 is the base price for 1 night
+        this.Price = NumOfBeds * 150; 
     }
 
     private boolean generateBoolean() {
