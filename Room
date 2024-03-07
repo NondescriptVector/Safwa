@@ -1,0 +1,60 @@
+package safwa;
+
+
+import javax.swing.JOptionPane;
+import java.util.Random;
+
+
+public class Room {
+
+    int ID, NumOfBeds;
+    double Price;
+    boolean Booked;
+    int nights;
+
+    Room(int ID) {
+        this.ID = ID;
+        this.Booked = new Random().nextBoolean();
+        this.NumOfBeds = new Random().nextInt(1, 4);
+        if (this.Booked) {
+            this.nights = new Random().nextInt(1, 5);
+        } else {
+            this.nights = 0;
+        }
+        this.Price = NumOfBeds * 150; // 150 is the base price for 1 night
+    }
+
+    void PrintRoomInfo() {
+        String roomInfo = "Room " + this.ID + ", Status: " + (this.Booked ? "Booked\n" : "Available\n")
+                + this.NumOfBeds + " beds\n" + "Price per night: " + this.Price + (this.Booked ? "\nBooked for: " + this.nights + " night(s)" : "");
+        JOptionPane.showMessageDialog(null, roomInfo);
+    }
+
+    void Reservation() {
+        int nights;
+
+        String numberNights = JOptionPane.showInputDialog(null, "Enter number of nights you want to stay:");
+        if (numberNights == null) {
+            return;
+        }
+        try {
+            nights = Integer.parseInt(numberNights);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid number of nights!", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (this.nights != 0) {
+            int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to reserve this room?\n"
+                    + "It will be a reservation for " + this.nights + " days from now.\n"
+                    + " Yes,  No", "Confirmation", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
+                this.nights += nights;
+            }
+        } else {
+            this.nights += nights;
+            this.Booked = true;
+        }
+        JOptionPane.showMessageDialog(null, "Reservation complete!");
+    }
+}
